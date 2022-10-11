@@ -1,18 +1,25 @@
-FROM node:15.14.0
+FROM node
 
-LABEL version=1.0
-LABEL maintainer="Piotr Gaczkowski"
+LABEL version=-.1
+LABEL maintainer="Travis Heath"
 
-COPY package.json package-lock.json /app/
+COPY package.json /app/
 
 WORKDIR /app
 
+#Shell format for run execution
+# RUN npm install -g npm
+#RUN whoami
 RUN npm install
+
+#Exec format for run execution
+#RUN ls /usr/bin | grep np
+#RUN ["/usr/local/lib/node_modules/npm", "install"]
 
 COPY . /app/
 
-RUN useradd -ms /bin/bash lowlywebrunner && \ chown lowlywebrunner:lowlywebrunner /app
+#RUN useradd -ms /bin/bash lowlywebrunner && \ chown lowlywebrunner:lowlywebrunner /app
 
-USER lowlywebrunner
+#USER lowlywebrunner
 
 CMD npm run start
